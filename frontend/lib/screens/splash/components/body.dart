@@ -16,15 +16,15 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "text": "Welcome to MuseumAR, Let’s Explore!",
-      "image": "assets/images/splash_1.png"
+      "text": "Welcome to NaviGatAR, Let’s Explore!",
+      "image": "assets/images/NaviGatAR_Logo.png"
     },
     {
-      "text": "We help people navigate within store \naround museum",
+      "text": "We help people navigate within buildings \naround across campus",
       "image": "assets/images/splash_2.png"
     },
     {
-      "text": "We help you learn history. \nIn a modern",
+      "text": "We help you know about points of interest. \nIn a modern",
       "image": "assets/images/splash_3.png"
     },
   ];
@@ -69,7 +69,7 @@ class _BodyState extends State<Body> {
                     // Spacer(flex: 3),
                     SizedBox(height: 30),
                     DefaultButton(
-                      text: "Continue as a Tourist",
+                      text: "Continue as a Student",
                       press: () {
                         Navigator.pushNamed(context, SignInScreen.routeName);
                       },
@@ -79,7 +79,7 @@ class _BodyState extends State<Body> {
                     Text('or', style: TextStyle(color: Color(0xfffa256a))),
                     SizedBox(height: 20),
                     DefaultButton(
-                      text: "Enlist your museum as an owner!",
+                      text: "Enlist your building as a campus owner!",
                       press: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Owner()));

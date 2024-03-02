@@ -61,7 +61,7 @@ class _Owner extends State<Owner> {
                           color: Colors.white,
                           fontSize: 30,
                           fontWeight: FontWeight.w600)),
-                  Text('Enlist yourself as a proud museum owner',
+                  Text('Enlist yourself as a campus owner',
                       style: TextStyle(
                           color: Color(0xff1ce0e2),
                           fontSize: 15,

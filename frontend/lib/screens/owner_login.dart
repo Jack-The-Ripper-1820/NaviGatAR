@@ -75,7 +75,7 @@ class _Login extends State<Login> {
                           color: Colors.white,
                           fontSize: 30,
                           fontWeight: FontWeight.w600)),
-                  Text('Sign in to your museum',
+                  Text('Sign in as a campus owner',
                       style: TextStyle(
                           color: Color(0xff1ce0e2),
                           fontSize: 15,

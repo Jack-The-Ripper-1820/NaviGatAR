@@ -16,7 +16,7 @@ class SplashContent extends StatelessWidget {
       children: <Widget>[
         Spacer(),
         Text(
-          "MuseumAR",
+          "NaviGatAR",
           style: TextStyle(
             fontSize: getProportionateScreenWidth(36),
             color: Colors.white,

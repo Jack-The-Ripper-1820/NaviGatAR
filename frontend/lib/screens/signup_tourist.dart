@@ -55,7 +55,7 @@ class _Signup extends State<Signup> {
                           color: Colors.white,
                           fontSize: 30,
                           fontWeight: FontWeight.w600)),
-                  Text('Sign up as an explorer and dwell into past',
+                  Text('Sign up as a student and start navigating',
                       style: TextStyle(
                           color: Color(0xff1ce0e2),
                           fontSize: 15,

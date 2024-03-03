@@ -10,6 +10,7 @@ import 'package:frontend/screens/sign_in/components/sign_form.dart';
 import 'package:frontend/screens/sign_in/sign_in_screen.dart';
 import 'package:frontend/screens/write_review.dart';
 import 'package:frontend/models/Desc.dart';
+import 'package:frontend/constants.dart';
 
 final dio = Dio();
 
@@ -37,8 +38,7 @@ class _Owner extends State<Owner> {
       "lastName": lname,
     };
 
-    Response response = await dio.post(
-        'https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/museumOwner/register',
+    Response response = await dio.post('$apiUrl/api/museumOwner/register',
         data: jsonEncode(params));
     // print('nasnasjn ios r${response.data['id']}');
     setState(() {

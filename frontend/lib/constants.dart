@@ -39,3 +39,5 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: kTextColor),
   );
 }
+
+const String apiUrl = 'http://localhost:8080';

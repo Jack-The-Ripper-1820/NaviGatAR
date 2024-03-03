@@ -8,6 +8,7 @@ import 'package:frontend/screens/sign_in/components/sign_form.dart';
 import 'package:frontend/screens/sign_in/sign_in_screen.dart';
 import 'package:frontend/screens/write_review.dart';
 import 'package:frontend/models/Desc.dart';
+import 'package:frontend/constants.dart';
 
 final dio = Dio();
 
@@ -34,8 +35,7 @@ class _Signup extends State<Signup> {
       "lastName": lname,
     };
 
-    Response response = await dio.post(
-        'https://35f6-2401-4900-1c52-2b33-b5b1-9129-2afd-1b03.in.ngrok.io/api/tourist/register',
+    Response response = await dio.post('$apiUrl/api/tourist/register',
         data: jsonEncode(params));
     print('nasnasjn ios r${response.data}');
   }

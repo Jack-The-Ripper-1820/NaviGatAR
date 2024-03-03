@@ -79,7 +79,7 @@ class _BodyState extends State<Body> {
                     Text('or', style: TextStyle(color: Color(0xfffa256a))),
                     SizedBox(height: 20),
                     DefaultButton(
-                      text: "Enlist your building as a campus owner!",
+                      text: "Continue as a Campus Owner",
                       press: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Owner()));

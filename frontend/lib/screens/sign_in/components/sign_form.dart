@@ -13,6 +13,7 @@ import '../../../size_config.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:frontend/constants.dart';
 
 final dio = Dio();
 
@@ -34,9 +35,8 @@ class _SignFormState extends State<SignForm> {
 
   Future<Details> login() async {
     var params = {"email": email, "password": password};
-    Response response = await dio.post(
-        'https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/tourist/login',
-        data: jsonEncode(params));
+    Response response =
+        await dio.post('$apiUrl/api/tourist/login', data: jsonEncode(params));
     Details det = Details.fromJson(response.data);
     return det;
   }

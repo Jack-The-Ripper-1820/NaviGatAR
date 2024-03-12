@@ -11,6 +11,8 @@ import '../models/Museum.dart';
 import 'package:frontend/models/Desc.dart';
 import '../path/createPath.dart';
 import 'comments.dart';
+import 'package:frontend/constants.dart';
+
 
 final dio = Dio();
 
@@ -27,7 +29,7 @@ class _MuseumDescription extends State<MuseumDescription> {
     var params = {"museumID": widget.id};
 
     Response data = await dio.get(
-        'https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/tourist/museumDetail',
+        '$apiUrl/api/tourist/museumDetail',
         data: jsonEncode(params));
     print('User info ${data.data}');
     Description description = Description.fromJson(data.data);

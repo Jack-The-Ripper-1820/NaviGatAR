@@ -7,6 +7,7 @@ import 'package:frontend/components/default_button.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:frontend/constants.dart';
 
 final dio = Dio();
 
@@ -30,7 +31,7 @@ class _ReviewsPageState extends State<Reviews> {
       "rating": rate
     };
     Response response = await dio.post(
-        'https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/tourist/createComment',
+        '$apiUrl/api/tourist/createComment',
         data: jsonEncode(params));
     print('After post res is ${response.data}');
   }

@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:frontend/models/Comments.dart';
 import 'package:frontend/models/Museum.dart';
+import 'package:frontend/constants.dart';
 
 final dio = Dio();
 
@@ -20,7 +21,7 @@ class _CommentsPageState extends State<CommentsPage> {
   Future<Comm> getComments() async {
     var params = {"museumID": widget.id};
     Response data = await dio.get(
-        'https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/tourist/commentFeed',
+        '$apiUrl/api/tourist/commentFeed',
         data: jsonEncode(params));
     print('Reviews ${data.data}');
     Comm cum = Comm.fromJson(data.data);

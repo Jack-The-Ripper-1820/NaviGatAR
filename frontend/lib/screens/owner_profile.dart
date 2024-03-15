@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/museum_owner.dart';
 import 'package:frontend/screens/qr_gen.dart';
+import 'package:frontend/constants.dart';
 
 const darkColor = Color(0xFF49535C);
 
@@ -128,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => QRGenerator(
                                           endPoint:
-                                              "https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/path/getPath/${widget.museumID}",
+                                              "$apiUrl/api/path/getPath/${widget.museumID}",
                                         )));
                           },
                           child: Container(

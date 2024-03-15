@@ -96,6 +96,7 @@ export const getAllMuseums = async (req: Request, res: Response) => {
         tags: true,
       },
     });
+    console.log("Get all museums successful");
     return res.json({ data: museumData });
   } catch (error) {
     console.log(error);

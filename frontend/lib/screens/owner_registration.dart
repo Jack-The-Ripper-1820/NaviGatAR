@@ -29,7 +29,7 @@ class _Owner extends State<Owner> {
   String? fname;
   String? id;
 
-  void save() async {
+  Future<void> save() async {
     var params = {
       "email": email,
       "password": password,
@@ -40,9 +40,11 @@ class _Owner extends State<Owner> {
 
     Response response = await dio.post('$apiUrl/api/museumOwner/register',
         data: jsonEncode(params));
-    // print('nasnasjn ios r${response.data['id']}');
+    print('RESPONSE ID: ${response.data['id']}');
     setState(() {
+      print('RESPONSE ID IN SET STATE: ${response.data['id']}');
       id = response.data['id'];
+      print('RESPONSE ID AFTER ASSIGN: ${id}');
     });
   }
 
@@ -168,8 +170,9 @@ class _Owner extends State<Owner> {
                     ),
                   ),
                   GestureDetector(
-                      onTap: () {
-                        save();
+                      onTap: () async {
+                        await save();
+                        print('OWNER ID AFTER SAVE CALL: $id');
                         Navigator.push(
                             context,
                             MaterialPageRoute(

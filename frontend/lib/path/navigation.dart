@@ -16,6 +16,7 @@ import 'package:vector_math/vector_math_64.dart';
 import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/material/colors.dart';
+import 'package:frontend/constants.dart';
 
 final dio = Dio();
 
@@ -127,9 +128,8 @@ class _ObjectGesturesWidgetState extends State<ARNavigationPage> {
       "arAnchorList": anchors
     };
 
-    var res = await dio.post(
-        "https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/path/uploadPath",
-        data: jsonEncode(params));
+    var res =
+        await dio.post("$apiUrl/api/path/uploadPath", data: jsonEncode(params));
     print(res);
     onRemoveEverything();
   }

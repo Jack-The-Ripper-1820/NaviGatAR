@@ -63,7 +63,7 @@ class _MuseumOwnerPageState extends State<MuseumOwnerPage> {
       Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(title: Text("AR View"), backgroundColor: Colors.black),
-        // body: ObjectGesturesWidget(),
+        body: ObjectGesturesWidget(),
       ),
       Scaffold(
           backgroundColor: Colors.black,

@@ -13,7 +13,6 @@ import '../path/createPath.dart';
 import 'comments.dart';
 import 'package:frontend/constants.dart';
 
-
 final dio = Dio();
 
 class MuseumDescription extends StatefulWidget {
@@ -28,8 +27,7 @@ class _MuseumDescription extends State<MuseumDescription> {
   Future<Description> getMuseum() async {
     var params = {"museumID": widget.id};
 
-    Response data = await dio.get(
-        '$apiUrl/api/tourist/museumDetail',
+    Response data = await dio.get('$apiUrl/api/tourist/museumDetail',
         data: jsonEncode(params));
     print('User info ${data.data}');
     Description description = Description.fromJson(data.data);
@@ -126,71 +124,77 @@ class _MuseumDescription extends State<MuseumDescription> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => QRScaner()));
-                            },
-                            child: Container(
-                                margin:
-                                    EdgeInsets.only(top: 10, left: 8, right: 8),
-                                padding: EdgeInsets.all(15),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Color(0xfffa256a),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: Text(
-                                  'Scan QR ',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
-                                ))),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          CommentsPage(id: widget.id)));
-                            },
-                            child: Container(
-                                margin:
-                                    EdgeInsets.only(top: 10, left: 8, right: 8),
-                                padding: EdgeInsets.all(15),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Color(0xfffa256a),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: Text(
-                                  'View reviews',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
-                                ))),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Reviews(id: widget.id)));
-                            },
-                            child: Container(
-                                margin:
-                                    EdgeInsets.only(top: 10, left: 8, right: 8),
-                                padding: EdgeInsets.all(15),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Color(0xfffa256a),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: Text(
-                                  'Add a review',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
-                                )))
+                        Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => QRScaner()));
+                              },
+                              child: Container(
+                                  margin: EdgeInsets.only(
+                                      top: 10, left: 8, right: 8),
+                                  padding: EdgeInsets.all(15),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xfffa256a),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  child: Text(
+                                    'Scan QR ',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
+                                  ))),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CommentsPage(id: widget.id)));
+                              },
+                              child: Container(
+                                  margin: EdgeInsets.only(
+                                      top: 10, left: 8, right: 8),
+                                  padding: EdgeInsets.all(15),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xfffa256a),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  child: Text(
+                                    'View reviews',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
+                                  ))),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Reviews(id: widget.id)));
+                              },
+                              child: Container(
+                                  margin: EdgeInsets.only(
+                                      top: 10, left: 8, right: 8),
+                                  padding: EdgeInsets.all(15),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xfffa256a),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  child: Text(
+                                    'Add a review',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
+                                  ))),
+                        ),
                       ],
                     ),
                   ],

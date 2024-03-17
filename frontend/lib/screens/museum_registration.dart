@@ -270,7 +270,7 @@ class _Museum extends State<MuseumRegistration> {
                       ),
                       TextFormField(
                         maxLines: null,
-                        minLines: 6,
+                        minLines: 2,
                         style: TextStyle(color: Colors.white),
                         // obscureText: true,
                         // onSaved: (newValue) => reviews,

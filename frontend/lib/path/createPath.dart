@@ -16,6 +16,7 @@ import 'package:vector_math/vector_math_64.dart';
 import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/material/colors.dart';
+import 'package:frontend/constants.dart';
 
 final dio = Dio();
 
@@ -63,23 +64,29 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
-                        onPressed: placeduck,
-                        child: const Text("Add Node"),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff1ce0e2)),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: placeduck,
+                          child: const Text("Add Node"),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff1ce0e2)),
+                        ),
                       ),
-                      ElevatedButton(
-                        onPressed: onUpload,
-                        child: const Text("Upload Path 🚀"),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff1ce0e2)),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: onUpload,
+                          child: const Text("Upload Path 🚀"),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff1ce0e2)),
+                        ),
                       ),
-                      ElevatedButton(
-                        onPressed: onFetchARNodes,
-                        child: const Text("Get Path"),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff1ce0e2)),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: onFetchARNodes,
+                          child: const Text("Get Path"),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff1ce0e2)),
+                        ),
                       ),
                     ]),
               )
@@ -125,16 +132,15 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
       "arAnchorList": anchors
     };
 
-    var res = await dio.post(
-        "https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/path/uploadPath",
-        data: jsonEncode(params));
+    var res =
+        await dio.post("$apiUrl/api/path/uploadPath", data: jsonEncode(params));
     print(res);
     onRemoveEverything();
   }
 
   void onFetchARNodes() async {
-    var res = await dio.get(
-        "https://cf64-2401-4900-1c52-2b33-f87d-8874-da4f-7372.in.ngrok.io/api/path/getPath/clf6q8xxj0002ufp455wp4jci");
+    var res =
+        await dio.get("$apiUrl/api/path/getPath/clf6q8xxj0002ufp455wp4jci");
 
     print(res.data[0]["transformation"]);
 

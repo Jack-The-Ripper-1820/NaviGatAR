@@ -145,9 +145,9 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
     print(res.data[0]["transformation"]);
 
     var newNode = ARNode(
-        type: NodeType.webGLB,
+        type: NodeType.localGLTF2,
         uri:
-            "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
+            "assets/icons/Duck.gltf",
         scale: Vector3(0.2, 0.2, 0.2),
         position: Vector3(0.011439, -0.00871425, -0.5),
         rotation: Vector4(0.534616, -0.525168, -0.468367, 0.467992));
@@ -201,9 +201,9 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
     arAnchorManager!.addAnchor(anchor);
 
     var newNode = ARNode(
-        type: NodeType.webGLB,
+        type: NodeType.localGLTF2,
         uri:
-            "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
+            "assets/icons/Duck.gltf",
         scale: Vector3(0.2, 0.2, 0.2),
         position: Vector3(0.011439, -0.00871425, -0.5),
         rotation: Vector4(0.534616, -0.525168, -0.468367, 0.467992));
@@ -238,9 +238,9 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         this.anchors.add(newAnchor);
         // Add note to anchor
         var newNode = ARNode(
-            type: NodeType.webGLB,
+            type: NodeType.localGLTF2,
             uri:
-                "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
+                "assets/icons/Duck.gltf",
             scale: Vector3(0.2, 0.2, 0.2),
             position: Vector3(0.0, 0.0, 0.0),
             rotation: Vector4(1.0, 0.0, 0.0, 0.0));

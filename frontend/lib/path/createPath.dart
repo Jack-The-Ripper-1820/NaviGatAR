@@ -21,7 +21,8 @@ import 'package:frontend/constants.dart';
 final dio = Dio();
 
 class ObjectGesturesWidget extends StatefulWidget {
-  ObjectGesturesWidget({Key? key}) : super(key: key);
+  final String museumId;
+  ObjectGesturesWidget({Key? key, required this.museumId}) : super(key: key);
   @override
   _ObjectGesturesWidgetState createState() => _ObjectGesturesWidgetState();
 }
@@ -128,7 +129,7 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
 
   void onUpload() async {
     var params = {
-      "museumID": "clf6q8xxj0002ufp455wp4jci",
+      "museumID": widget.museumId,
       "arAnchorList": anchors
     };
 
@@ -140,7 +141,7 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
 
   void onFetchARNodes() async {
     var res =
-        await dio.get("$apiUrl/api/path/getPath/clf6q8xxj0002ufp455wp4jci");
+        await dio.get("$apiUrl/api/path/getPath/${widget.museumId}");
 
     print(res.data[0]["transformation"]);
 

@@ -91,49 +91,49 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class ExampleList extends StatelessWidget {
-  ExampleList({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final examples = [
-      Example(
-          'Object Transformation Gestures',
-          'Rotate and Pan Objects',
-          () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ObjectGesturesWidget()))),
-    ];
-    return ListView(
-      children:
-          examples.map((example) => ExampleCard(example: example)).toList(),
-    );
-  }
-}
-
-class ExampleCard extends StatelessWidget {
-  ExampleCard({Key? key, required this.example}) : super(key: key);
-  final Example example;
-
-  @override
-  build(BuildContext context) {
-    return Card(
-      child: InkWell(
-        splashColor: Colors.blue.withAlpha(30),
-        onTap: () {
-          example.onTap();
-        },
-        child: ListTile(
-          title: Text(example.name),
-          subtitle: Text(example.description),
-        ),
-      ),
-    );
-  }
-}
-
-class Example {
-  const Example(this.name, this.description, this.onTap);
-  final String name;
-  final String description;
-  final Function onTap;
-}
+// class ExampleList extends StatelessWidget {
+//   ExampleList({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final examples = [
+//       Example(
+//           'Object Transformation Gestures',
+//           'Rotate and Pan Objects',
+//           () => Navigator.push(context,
+//               MaterialPageRoute(builder: (context) => ObjectGesturesWidget()))),
+//     ];
+//     return ListView(
+//       children:
+//           examples.map((example) => ExampleCard(example: example)).toList(),
+//     );
+//   }
+// }
+//
+// class ExampleCard extends StatelessWidget {
+//   ExampleCard({Key? key, required this.example}) : super(key: key);
+//   final Example example;
+//
+//   @override
+//   build(BuildContext context) {
+//     return Card(
+//       child: InkWell(
+//         splashColor: Colors.blue.withAlpha(30),
+//         onTap: () {
+//           example.onTap();
+//         },
+//         child: ListTile(
+//           title: Text(example.name),
+//           subtitle: Text(example.description),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class Example {
+//   const Example(this.name, this.description, this.onTap);
+//   final String name;
+//   final String description;
+//   final Function onTap;
+// }

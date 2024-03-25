@@ -1,3 +1,122 @@
+// import 'dart:convert';
+// import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
+// import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
+// import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
+// import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
+// import 'package:ar_flutter_plugin/models/ar_anchor.dart';
+// import 'package:flutter/material.dart';
+// import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
+// import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
+// import 'package:ar_flutter_plugin/datatypes/node_types.dart';
+// import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
+// import 'package:ar_flutter_plugin/models/ar_node.dart';
+// import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
+// import 'package:flutter/services.dart';
+// import 'package:vector_math/vector_math_64.dart';
+// import 'dart:math';
+// import 'package:dio/dio.dart';
+// import 'package:flutter/src/material/colors.dart';
+// import 'package:frontend/constants.dart';
+//
+// final dio = Dio();
+//
+// class ARNavigationPage extends StatefulWidget {
+//   ARNavigationPage({Key? key, required this.endPoint}) : super(key: key);
+//   final String endPoint;
+//   @override
+//   _ObjectGesturesWidgetState createState() => _ObjectGesturesWidgetState();
+// }
+//
+// class _ObjectGesturesWidgetState extends State<ARNavigationPage> {
+//   ARSessionManager? arSessionManager;
+//   ARObjectManager? arObjectManager;
+//   ARAnchorManager? arAnchorManager;
+//
+//   List<ARNode> nodes = [];
+//   List<ARAnchor> anchors = [];
+//
+//   // List nodes = [];
+//   // List anchors = [];
+//
+//   @override
+//   void dispose() {
+//     super.dispose();
+//     arSessionManager!.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     print(widget.endPoint);
+//     return Scaffold(
+//         backgroundColor: Color(0xff000000),
+//         appBar: AppBar(
+//           title: const Text('AR Navigation'),
+//           backgroundColor: Color(0xff000000),
+//         ),
+//         body: Container(
+//             padding: const EdgeInsets.all(16),
+//             child: Stack(children: [
+//               ARView(
+//                 onARViewCreated: onARViewCreated,
+//                 planeDetectionConfig:
+//                     PlaneDetectionConfig.horizontalAndVertical,
+//               ),
+//               Align(
+//                 alignment: FractionalOffset.bottomCenter,
+//                 child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                     children: [
+//                       ElevatedButton(
+//                         onPressed: placeduck,
+//                         child: const Text("Add Node"),
+//                         style: ElevatedButton.styleFrom(
+//                             backgroundColor: Color(0xff1ce0e2)),
+//                       ),
+//                       ElevatedButton(
+//                         onPressed: onUpload,
+//                         child: const Text("Upload Path 🚀"),
+//                         style: ElevatedButton.styleFrom(
+//                             backgroundColor: Color(0xff1ce0e2)),
+//                       ),
+//                       ElevatedButton(
+//                         onPressed: onFetchARNodes,
+//                         child: const Text("Get Path"),
+//                         style: ElevatedButton.styleFrom(
+//                             backgroundColor: Color(0xff1ce0e2)),
+//                       ),
+//                     ]),
+//               )
+//             ])));
+//   }
+//
+//   void onARViewCreated(
+//       ARSessionManager arSessionManager,
+//       ARObjectManager arObjectManager,
+//       ARAnchorManager arAnchorManager,
+//       ARLocationManager arLocationManager) {
+//     this.arSessionManager = arSessionManager;
+//     this.arObjectManager = arObjectManager;
+//     this.arAnchorManager = arAnchorManager;
+//
+//     this.arSessionManager!.onInitialize(
+//           showFeaturePoints: false,
+//           showPlanes: true,
+//           customPlaneTexturePath: "Images/triangle.png",
+//           showWorldOrigin: true,
+//           handlePans: true,
+//           handleRotation: true,
+//         );
+//     this.arObjectManager!.onInitialize();
+//
+//     this.arSessionManager!.onPlaneOrPointTap = onPlaneOrPointTapped;
+//     this.arObjectManager!.onPanStart = onPanStarted;
+//     this.arObjectManager!.onPanChange = onPanChanged;
+//     this.arObjectManager!.onPanEnd = onPanEnded;
+//     this.arObjectManager!.onRotationStart = onRotationStarted;
+//     this.arObjectManager!.onRotationChange = onRotationChanged;
+//     this.arObjectManager!.onRotationEnd = onRotationEnded;
+//   }
+
 import 'dart:convert';
 import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
@@ -35,9 +154,6 @@ class _ObjectGesturesWidgetState extends State<ARNavigationPage> {
   List<ARNode> nodes = [];
   List<ARAnchor> anchors = [];
 
-  // List nodes = [];
-  // List anchors = [];
-
   @override
   void dispose() {
     super.dispose();
@@ -59,25 +175,14 @@ class _ObjectGesturesWidgetState extends State<ARNavigationPage> {
               ARView(
                 onARViewCreated: onARViewCreated,
                 planeDetectionConfig:
-                    PlaneDetectionConfig.horizontalAndVertical,
+                PlaneDetectionConfig.horizontalAndVertical,
               ),
               Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
-                        onPressed: placeduck,
-                        child: const Text("Add Node"),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff1ce0e2)),
-                      ),
-                      ElevatedButton(
-                        onPressed: onUpload,
-                        child: const Text("Upload Path 🚀"),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff1ce0e2)),
-                      ),
+                      // Buttons for "Add Node" and "Upload Path" removed
                       ElevatedButton(
                         onPressed: onFetchARNodes,
                         child: const Text("Get Path"),
@@ -99,13 +204,13 @@ class _ObjectGesturesWidgetState extends State<ARNavigationPage> {
     this.arAnchorManager = arAnchorManager;
 
     this.arSessionManager!.onInitialize(
-          showFeaturePoints: false,
-          showPlanes: true,
-          customPlaneTexturePath: "Images/triangle.png",
-          showWorldOrigin: true,
-          handlePans: true,
-          handleRotation: true,
-        );
+      showFeaturePoints: false,
+      showPlanes: true,
+      customPlaneTexturePath: "Images/triangle.png",
+      showWorldOrigin: true,
+      handlePans: true,
+      handleRotation: true,
+    );
     this.arObjectManager!.onInitialize();
 
     this.arSessionManager!.onPlaneOrPointTap = onPlaneOrPointTapped;

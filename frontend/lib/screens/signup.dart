@@ -1,54 +1,76 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter/services.dart';
-import 'package:frontend/components/custom_surfix_icon.dart';
-import 'package:frontend/screens/museum_registration.dart';
-import 'package:frontend/screens/owner_login.dart';
-import 'package:frontend/screens/sign_in/components/sign_form.dart';
-import 'package:frontend/screens/sign_in/sign_in_screen.dart';
-import 'package:frontend/screens/write_review.dart';
-import 'package:frontend/models/Desc.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/screens/register_museum.dart';
+import 'package:frontend/screens/sign_in/sign_in.dart';
+import 'package:hive/hive.dart';
+
+import '../components/default_button.dart';
+import '../components/form_error.dart';
+import '../models/Sign_in_res.dart';
+import 'home.dart';
 
 final dio = Dio();
 
-class Owner extends StatefulWidget {
-  Owner({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+ static String routeName = '/sign_up';
+  SignUp({Key? key}) : super(key: key);
   @override
-  _Owner createState() => _Owner();
+  _Signup createState() => _Signup();
 }
 
-class _Owner extends State<Owner> {
+class _Signup extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
-  String? mobile;
   String? lname;
   String? fname;
-  String? id;
+  final List<String?> errors = [];
 
-  Future<void> save() async {
+  Future<void> submit(role) async {
+  await register(role);
+  await login(role);
+}
+
+  Future<void> register(role) async {
     var params = {
       "email": email,
       "password": password,
       "firstName": fname,
-      "mobileNum": mobile,
       "lastName": lname,
     };
-
-    Response response = await dio.post('$apiUrl/api/museumOwner/register',
+    await dio.post('$apiUrl/api/${role == 'STUDENT' ? 'tourist' : 'museumOwner'}/register',
         data: jsonEncode(params));
-    print('RESPONSE ID: ${response.data['id']}');
-    setState(() {
-      print('RESPONSE ID IN SET STATE: ${response.data['id']}');
-      id = response.data['id'];
-      print('RESPONSE ID AFTER ASSIGN: ${id}');
-    });
+  }
+
+  Future<void> login(role) async {
+    var params = {"email": email, "password": password};
+    Response response =
+    await dio.post('$apiUrl/api/${role == 'STUDENT' ? 'tourist' : 'museumOwner'}/login', data: jsonEncode(params));
+    Details det = Details.fromJson(response.data);
+    final user = Hive.box("user");
+    user.put('id', det.userData!.id);
+    user.put('token', det.userData!.token);
+  }
+
+  void addError({String? error}) {
+    if (!errors.contains(error))
+      setState(() {
+        errors.add(error);
+      });
+  }
+
+  void removeError({String? error}) {
+    if (errors.contains(error))
+      setState(() {
+        errors.remove(error);
+      });
   }
 
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    final role = arguments['role'];
     return Scaffold(
         backgroundColor: Colors.black,
         body: ListView(
@@ -63,7 +85,7 @@ class _Owner extends State<Owner> {
                           color: Colors.white,
                           fontSize: 30,
                           fontWeight: FontWeight.w600)),
-                  Text('Enlist yourself as a campus owner',
+                  Text('Sign up as a ${role == 'STUDENT' ? 'student': 'owner'}',
                       style: TextStyle(
                           color: Color(0xff1ce0e2),
                           fontSize: 15,
@@ -78,9 +100,27 @@ class _Owner extends State<Owner> {
                     // obscureText: true,
                     onSaved: (newValue) => email = newValue,
                     onChanged: (value) {
+                      if (value.isNotEmpty) {
+                        removeError(error: kEmailNullError);
+                      } else if (emailValidatorRegExp.hasMatch(value)) {
+                        removeError(error: kInvalidEmailError);
+                      }
                       setState(() {
                         email = value;
                       });
+                      return null;
+                    },
+                    validator: (value) {
+                      removeError(error: kInvalidEmailError);
+                      removeError(error: kEmailNullError);
+                      if (value!.isEmpty) {
+                        addError(error: kEmailNullError);
+                        return "";
+                      } else if (!emailValidatorRegExp.hasMatch(value)) {
+                        addError(error: kInvalidEmailError);
+                        return "";
+                      }
+                      return null;
                     },
                     decoration: InputDecoration(
                         labelText: "Email Id",
@@ -94,33 +134,29 @@ class _Owner extends State<Owner> {
                     margin: EdgeInsets.only(top: 20),
                     child: TextFormField(
                       style: TextStyle(color: Colors.white),
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      onSaved: (newValue) => email = newValue,
-                      onChanged: (value) {
-                        setState(() {
-                          mobile = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                          labelText: "Mobile Number",
-                          filled: true,
-                          fillColor: Color(0xff1a1a1a),
-                          labelStyle: TextStyle(color: Color(0xfffa256a)),
-                          floatingLabelBehavior: FloatingLabelBehavior.auto,
-                          suffixIcon: Icon(Icons.mobile_friendly)),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: TextFormField(
-                      style: TextStyle(color: Colors.white),
                       obscureText: true,
                       onSaved: (newValue) => email = newValue,
                       onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          removeError(error: kPassNullError);
+                        } else if (value.length >= 8) {
+                          removeError(error: kShortPassError);
+                        }
                         setState(() {
                           password = value;
                         });
+                      },
+                      validator: (value) {
+                        removeError(error: kPassNullError);
+                        removeError(error: kShortPassError);
+                        if (value!.isEmpty) {
+                          addError(error: kPassNullError);
+                          return "";
+                        } else if (value.length < 8) {
+                          addError(error: kShortPassError);
+                          return "";
+                        }
+                        return null;
                       },
                       decoration: InputDecoration(
                           labelText: "Password",
@@ -137,9 +173,19 @@ class _Owner extends State<Owner> {
                       style: TextStyle(color: Colors.white),
                       onSaved: (newValue) => email = newValue,
                       onChanged: (value) {
+                        if(value.isNotEmpty){
+                          removeError(error: kFirstNameNullError);
+                        }
                         setState(() {
                           fname = value;
                         });
+                      },
+                      validator: (value) {
+                        if(value!.isEmpty) {
+                          addError(error: kFirstNameNullError);
+                          return '';
+                        }
+                        return null;
                       },
                       decoration: InputDecoration(
                           labelText: "First Name",
@@ -156,9 +202,19 @@ class _Owner extends State<Owner> {
                       style: TextStyle(color: Colors.white),
                       onSaved: (newValue) => email = newValue,
                       onChanged: (value) {
+                        if(value.isNotEmpty){
+                          removeError(error: kLastNameNullError);
+                        }
                         setState(() {
-                          lname = value;
+                          fname = value;
                         });
+                      },
+                      validator: (value) {
+                        if(value!.isEmpty) {
+                          addError(error: kLastNameNullError);
+                          return '';
+                        }
+                        return null;
                       },
                       decoration: InputDecoration(
                           labelText: "Last Name",
@@ -169,35 +225,37 @@ class _Owner extends State<Owner> {
                           suffixIcon: Icon(Icons.text_fields)),
                     ),
                   ),
-                  GestureDetector(
-                      onTap: () async {
-                        await save();
-                        print('OWNER ID AFTER SAVE CALL: $id');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    MuseumRegistration(oid: id)));
-                      },
-                      child: Container(
-                          margin: EdgeInsets.only(top: 20, left: 8, right: 8),
-                          padding: EdgeInsets.all(15),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Color(0xfffa256a),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ))),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  FormError(errors: errors),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  DefaultButton(
+                    text: "Submit",
+                    press: () async {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        await submit(role);
+                        if(role == 'OWNER') {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterMuseum()));
+                        } else {
+                          Navigator.pushNamed(context, Home.routeName);
+                        }
+                      }
+                    },
+                  ),
                   SizedBox(
                     height: 30,
                   ),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Login()));
+                          MaterialPageRoute(builder: (context) => SignIn()));
                     },
                     child: Container(
                         child: Text("Already have an account? Sign in now",

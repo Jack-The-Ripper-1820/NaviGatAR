@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/signup_tourist.dart';
+import 'package:frontend/screens/signup.dart';
 //import 'package:flutter_application_1/screens/sign_up/sign_up_screen.dart';
 
 import '../constants.dart';
@@ -21,7 +21,7 @@ class NoAccountText extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Signup())),
+              context, MaterialPageRoute(builder: (context) => SignUp())),
           child: Text(
             "Sign Up",
             style: TextStyle(

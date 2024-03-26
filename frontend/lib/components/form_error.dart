@@ -19,19 +19,22 @@ class FormError extends StatelessWidget {
     );
   }
 
-  Row formErrorText({required String error}) {
-    return Row(
-      children: [
-        SvgPicture.asset(
-          "assets/icons/Error.svg",
-          height: getProportionateScreenWidth(14),
-          width: getProportionateScreenWidth(14),
-        ),
-        SizedBox(
-          width: getProportionateScreenWidth(10),
-        ),
-        Text(error),
-      ],
+  Container formErrorText({required String error}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            "assets/icons/Error.svg",
+            height: getProportionateScreenWidth(14),
+            width: getProportionateScreenWidth(14),
+          ),
+          SizedBox(
+            width: getProportionateScreenWidth(10),
+          ),
+          Text(error),
+        ],
+      ),
     );
   }
 }

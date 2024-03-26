@@ -58,7 +58,7 @@ export const login = async (req: Request, res: Response) => {
 
     if (!userData)
       return res
-        .status(404)
+        .status(401)
         .json({ username: "Worng username and password combination !!" });
 
     //gen JWT

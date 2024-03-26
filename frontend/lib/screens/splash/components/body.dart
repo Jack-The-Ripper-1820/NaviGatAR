@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/owner_registration.dart';
+import 'package:frontend/screens/signup.dart';
 import '../../../constants.dart';
-import '../../../screens/sign_in/sign_in_screen.dart';
 import '../../../size_config.dart';
 
 import '../components/splash_content.dart';
@@ -36,6 +35,17 @@ class _BodyState extends State<Body> {
         width: double.infinity,
         child: Column(
           children: <Widget>[
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 16),
+              child: Text(
+                "NaviGatAR",
+                style: TextStyle(
+                  fontSize: getProportionateScreenWidth(36),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             Expanded(
               flex: 3,
               child: PageView.builder(
@@ -69,9 +79,9 @@ class _BodyState extends State<Body> {
                     // Spacer(flex: 3),
                     SizedBox(height: 30),
                     DefaultButton(
-                      text: "Continue as a Student",
+                      text: "I'm a Student",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        Navigator.pushNamed(context, SignUp.routeName, arguments: {'role': 'STUDENT'});
                       },
                     ),
                     // Spacer(flex:3),
@@ -79,10 +89,10 @@ class _BodyState extends State<Body> {
                     Text('or', style: TextStyle(color: Color(0xfffa256a))),
                     SizedBox(height: 20),
                     DefaultButton(
-                      text: "Continue as a Campus Owner",
+                      text: "I'm a Campus Owner",
                       press: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Owner()));
+                        Navigator.pushNamed(context, SignUp.routeName, arguments: {'role': 'OWNER'});
+
                       },
                     ),
                     Spacer(),

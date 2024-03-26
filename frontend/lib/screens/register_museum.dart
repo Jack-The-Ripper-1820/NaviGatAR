@@ -6,21 +6,22 @@ import 'package:flutter/services.dart';
 import 'package:frontend/components/custom_surfix_icon.dart';
 import 'package:frontend/models/Museum.dart';
 import 'package:frontend/screens/sign_in/components/sign_form.dart';
-import 'package:frontend/screens/sign_in/sign_in_screen.dart';
+import 'package:frontend/screens/sign_in/sign_in.dart';
 import 'package:frontend/screens/write_review.dart';
 import 'package:frontend/models/Desc.dart';
 import 'package:frontend/constants.dart';
+import 'package:hive/hive.dart';
 
 final dio = Dio();
 
-class MuseumRegistration extends StatefulWidget {
-  MuseumRegistration({Key? key, required this.oid}) : super(key: key);
-  final String? oid;
+class RegisterMuseum extends StatefulWidget {
+  static String routeName = '/register-museum';
+  RegisterMuseum({Key? key}) : super(key: key);
   @override
-  _Museum createState() => _Museum();
+  _RegisterMuseum createState() => _RegisterMuseum();
 }
 
-class _Museum extends State<MuseumRegistration> {
+class _RegisterMuseum extends State<RegisterMuseum> {
   final _formKey = GlobalKey<FormState>();
   String? museumName;
   String? inTime;
@@ -35,13 +36,10 @@ class _Museum extends State<MuseumRegistration> {
   bool flag5 = false;
   bool flag6 = false;
   void save() async {
-    print(inTime);
-    print(museumName);
-    print(outTime);
-    print(info);
-    print(widget.oid);
+    final user = Hive.box("user");
+    final oid = user.get('id');
     var params = {
-      'ownerID': widget.oid,
+      'ownerID': oid,
       'museumName': museumName,
       'inTime': inTime,
       'outTime': outTime,
@@ -54,10 +52,6 @@ class _Museum extends State<MuseumRegistration> {
     );
   }
 
-  void initState() {
-    print(widget.oid);
-    super.initState();
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -291,7 +285,7 @@ class _Museum extends State<MuseumRegistration> {
                           onTap: () {
                             save();
                             Navigator.pushNamed(
-                                context, SignInScreen.routeName);
+                                context, SignIn.routeName);
                           },
                           child: Container(
                               margin:

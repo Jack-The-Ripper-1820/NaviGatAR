@@ -14,15 +14,6 @@ class SplashContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Spacer(),
-        Text(
-          "NaviGatAR",
-          style: TextStyle(
-            fontSize: getProportionateScreenWidth(36),
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
         Text(
           text!,
           textAlign: TextAlign.center,

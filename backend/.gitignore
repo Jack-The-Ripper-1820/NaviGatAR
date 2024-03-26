@@ -17,3 +17,5 @@
 .env
 ./.env
 /util/csvToJson.ts
+
+.idea/

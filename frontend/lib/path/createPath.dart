@@ -148,10 +148,10 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
     var newNode = ARNode(
         type: NodeType.localGLTF2,
         uri:
-            "assets/icons/Duck.gltf",
-        scale: Vector3(0.2, 0.2, 0.2),
+            "assets/icons/scene.gltf",
+        scale: Vector3(0.1, 0.1, 0.1),
         position: Vector3(0.011439, -0.00871425, -0.5),
-        rotation: Vector4(0.534616, -0.525168, -0.468367, 0.467992));
+        rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
 
     for (int i = 0; i < res.data.length; i++) {
       var x = res.data[i]["transformation"];
@@ -204,10 +204,10 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
     var newNode = ARNode(
         type: NodeType.localGLTF2,
         uri:
-            "assets/icons/Duck.gltf",
-        scale: Vector3(0.2, 0.2, 0.2),
+            "assets/icons/scene.gltf",
+        scale: Vector3(0.1, 0.1, 0.1),
         position: Vector3(0.011439, -0.00871425, -0.5),
-        rotation: Vector4(0.534616, -0.525168, -0.468367, 0.467992));
+        rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
     this.arObjectManager!.addNode(newNode, planeAnchor: anchor);
     bool? didAddAnchor =
         await this.arObjectManager!.addNode(newNode, planeAnchor: anchor);
@@ -241,8 +241,8 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         var newNode = ARNode(
             type: NodeType.localGLTF2,
             uri:
-                "assets/icons/Duck.gltf",
-            scale: Vector3(0.2, 0.2, 0.2),
+                "assets/icons/scene.gltf",
+            scale: Vector3(0.1, 0.1, 0.1),
             position: Vector3(0.0, 0.0, 0.0),
             rotation: Vector4(1.0, 0.0, 0.0, 0.0));
         bool? didAddNodeToAnchor =

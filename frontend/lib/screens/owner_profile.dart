@@ -109,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "Museum Name: ${widget.museumName}",
+                              "Location: ${widget.museumName}",
                               style: TextStyle(
                                   fontFamily: "montserrat",
                                   fontSize: 16,

@@ -55,7 +55,7 @@ class _MuseumList extends State<MuseumList> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(top: 70, left: 15),
-                        child: Text('Museums',
+                        child: Text('Campus Locations',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 40,

@@ -75,7 +75,7 @@ class _Museum extends State<MuseumRegistration> {
                           fontSize: 30,
                           fontWeight: FontWeight.w600)),
                   Text(
-                      'We would love to know a little bit  \n more about your museum',
+                      'We would love to know a little bit  \n more about this campus location',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color(0xff1ce0e2),
@@ -100,7 +100,7 @@ class _Museum extends State<MuseumRegistration> {
                           });
                         },
                         decoration: InputDecoration(
-                            labelText: "Museum Name",
+                            labelText: "Location Name",
                             filled: true,
                             fillColor: Color(0xff1a1a1a),
                             labelStyle: TextStyle(color: Color(0xfffa256a)),
@@ -161,7 +161,7 @@ class _Museum extends State<MuseumRegistration> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Add tags about your museum:',
+                        'Add tags about this location:',
                         style: TextStyle(color: Color(0xfffa256a)),
                       ),
                       Wrap(
@@ -171,12 +171,12 @@ class _Museum extends State<MuseumRegistration> {
                             onPressed: () => {
                               setState(() => flag1 = !flag1),
                               if (flag1)
-                                {tags.add('Science')}
+                                {tags.add('CISE')}
                               else if (!flag1)
-                                {tags.remove('Science')},
+                                {tags.remove('CISE')},
                               print(tags)
                             },
-                            child: Text('Science'),
+                            child: Text('CISE'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: flag1
                                   ? Colors.red
@@ -187,12 +187,12 @@ class _Museum extends State<MuseumRegistration> {
                             onPressed: () => {
                               setState(() => flag2 = !flag2),
                               if (flag2)
-                                {tags.add('Transport')}
+                                {tags.add('ECE')}
                               else if (!flag2)
-                                {tags.remove('Transport')},
+                                {tags.remove('ECE')},
                               print(tags)
                             },
-                            child: Text('Transport'),
+                            child: Text('ECE'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: flag2
                                   ? Colors.red
@@ -203,12 +203,12 @@ class _Museum extends State<MuseumRegistration> {
                             onPressed: () => {
                               setState(() => flag3 = !flag3),
                               if (flag3)
-                                {tags.add('Space')}
+                                {tags.add('BME')}
                               else if (!flag3)
-                                {tags.remove('Space')},
+                                {tags.remove('BME')},
                               print(tags)
                             },
-                            child: Text('Space'),
+                            child: Text('BME'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: flag3
                                   ? Colors.red
@@ -219,12 +219,12 @@ class _Museum extends State<MuseumRegistration> {
                             onPressed: () => {
                               setState(() => flag4 = !flag4),
                               if (flag4)
-                                {tags.add('Prehistoric')}
+                                {tags.add('IFAS')}
                               else if (!flag4)
-                                {tags.remove('Prehistoric')},
+                                {tags.remove('IFAS')},
                               print(tags)
                             },
-                            child: Text('Prehistoric'),
+                            child: Text('IFAS'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: flag4
                                   ? Colors.red
@@ -235,12 +235,12 @@ class _Museum extends State<MuseumRegistration> {
                             onPressed: () => {
                               setState(() => flag5 = !flag5),
                               if (flag5)
-                                {tags.add('Defense')}
+                                {tags.add('Class')}
                               else if (!flag5)
-                                {tags.remove('Defense')},
+                                {tags.remove('Class')},
                               print(tags)
                             },
-                            child: Text('Defense'),
+                            child: Text('Class'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: flag5
                                   ? Colors.red
@@ -251,12 +251,12 @@ class _Museum extends State<MuseumRegistration> {
                             onPressed: () => {
                               setState(() => flag6 = !flag6),
                               if (flag6)
-                                {tags.add('Others')}
+                                {tags.add('Conference Room')}
                               else if (!flag6)
-                                {tags.remove('Others')},
+                                {tags.remove('Conference Room')},
                               print(tags)
                             },
-                            child: Text('Others'),
+                            child: Text('Conference Room'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: flag6
                                   ? Colors.red
@@ -280,7 +280,7 @@ class _Museum extends State<MuseumRegistration> {
                           });
                         },
                         decoration: InputDecoration(
-                          labelText: "Write a little bit about your museum...",
+                          labelText: "Write a little bit about this location...",
                           filled: true,
                           fillColor: Color(0xff1a1a1a),
                           labelStyle: TextStyle(color: Color(0xfffa256a)),

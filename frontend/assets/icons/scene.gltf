@@ -1,88 +1,66 @@
 {
   "accessors": [
     {
-      "bufferView": 2,
+      "bufferView": 1,
       "componentType": 5126,
-      "count": 30720,
+      "count": 32514,
       "max": [
-        2.960988759994507,
-        2.969444990158081,
-        2.9590539932250977
+        10.0,
+        10.0,
+        20.0
       ],
       "min": [
-        -2.960988998413086,
-        -2.969444990158081,
-        -2.9591634273529053
-      ],
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 2,
-      "byteOffset": 368640,
-      "componentType": 5126,
-      "count": 30720,
-      "max": [
-        0.9999874234199524,
-        1.0,
-        1.0
-      ],
-      "min": [
-        -0.999958872795105,
-        -1.0,
-        -1.0
+        -10.0,
+        -10.0,
+        0.0
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
+      "byteOffset": 390168,
       "componentType": 5126,
-      "count": 30720,
+      "count": 32514,
       "max": [
-        0.9896636009216309,
-        0.4718904495239258
+        1.0,
+        0.9999416470527649,
+        0.9999415874481201
       ],
       "min": [
-        -0.00020806881366297603,
-        -0.0001030157582135871
+        -1.0,
+        -0.9999416470527649,
+        -0.9999415874481201
       ],
-      "type": "VEC2"
+      "type": "VEC3"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 46068,
+      "count": 195072,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "Abby Crawford (https://sketchfab.com/abby)",
-      "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
-      "source": "https://sketchfab.com/3d-models/3december-day-1-a-maze-ball-03818f3b71de400088985fc076a0be69",
-      "title": "3December Day 1: A-maze-ball"
+      "author": "3DVarious (https://sketchfab.com/3DVarious)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/sphere-b31b12ffa93a40f48c9d991b6f168f4d",
+      "title": "Sphere"
     },
-    "generator": "Sketchfab-15.49.0",
+    "generator": "Sketchfab-12.66.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 184272,
+      "byteLength": 780288,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 245760,
-      "byteOffset": 184272,
-      "byteStride": 8,
-      "name": "floatBufferViews",
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 737280,
-      "byteOffset": 430032,
+      "byteLength": 780336,
+      "byteOffset": 780288,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
@@ -90,22 +68,17 @@
   ],
   "buffers": [
     {
-      "byteLength": 1167312,
+      "byteLength": 1560624,
       "uri": "scene.bin"
     }
   ],
   "materials": [
     {
       "doubleSided": true,
-      "name": "Material.001",
+      "name": "Scene_-_Root",
       "pbrMetallicRoughness": {
-        "baseColorFactor": [
-          0.009770685722954022,
-          0.4404641729196031,
-          0.3971291694074382,
-          1.0
-        ],
-        "metallicFactor": 0.0
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.6
       }
     }
   ],
@@ -116,10 +89,9 @@
         {
           "attributes": {
             "NORMAL": 1,
-            "POSITION": 0,
-            "TEXCOORD_0": 2
+            "POSITION": 0
           },
-          "indices": 3,
+          "indices": 2,
           "material": 0,
           "mode": 4
         }
@@ -155,41 +127,11 @@
       "children": [
         2
       ],
-      "name": "root"
-    },
-    {
-      "children": [
-        3
-      ],
-      "matrix": [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        2.220446049250313e-16,
-        1.0,
-        0.0,
-        0.0,
-        -1.0,
-        2.220446049250313e-16,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "name": "GLTF_SceneRootNode"
-    },
-    {
-      "children": [
-        4
-      ],
-      "name": "Icosphere_0"
+      "name": "spheree.stl.cleaner.materialmerger.gles"
     },
     {
       "mesh": 0,
-      "name": "Object_4"
+      "name": "Object_2"
     }
   ],
   "scene": 0,

@@ -81,7 +81,7 @@ class _MuseumDescription extends State<MuseumDescription> {
                           children: [
                             Container(
                               margin: EdgeInsets.only(bottom: 10),
-                              child: Text('About the Museum',
+                              child: Text('About the Location',
                                   style: TextStyle(
                                       color: Color(0xfffa256a),
                                       fontSize: 20,

@@ -38,4 +38,4 @@ OutlineInputBorder outlineInputBorder() {
   );
 }
 
-const String apiUrl = 'http://192.168.0.167:8080';
+const String apiUrl = 'http://10.2.0.249:8080';

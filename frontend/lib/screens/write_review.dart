@@ -70,7 +70,7 @@ class _ReviewsPageState extends State<Reviews> {
                 margin: EdgeInsets.only(
                   top: 15,
                 ),
-                child: Text('How was your experience at the museum?',
+                child: Text('How was your experience at this location?',
                     style: TextStyle(
                         color: Color(0xfffa256a),
                         fontSize: 15,

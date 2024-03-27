@@ -13,7 +13,7 @@ import 'package:frontend/screens/qr_scan.dart';
 import 'models/Museum.dart';
 import 'theme.dart';
 import 'constants.dart';
-import 'routs.dart';
+import 'routes.dart';
 import 'package:hive/hive.dart';
 import 'screens/splash/splash_screen.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,6 +26,7 @@ void main() async {
   // Hive.init(appDocumentDirectory.path);
   await Hive.initFlutter();
   var box = await Hive.openBox("user");
+  SystemChannels.textInput.invokeMethod('TextInput.hide');
   runApp(MyApp());
 }
 
@@ -73,67 +74,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-
-        // body: Column(children: [
-        //   Text('Running on: $_platformVersion\n'),
-        //   Expanded(
-        //     child: ExampleList(),
-        //   ),
-        // ]),
-        // body: MuseumOwnerPage(),
-      ),
       theme: theme(),
-      initialRoute: SplashScreen.routeName,
+      home: const SplashScreen(),
       routes: routes,
     );
   }
 }
-
-// class ExampleList extends StatelessWidget {
-//   ExampleList({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final examples = [
-//       Example(
-//           'Object Transformation Gestures',
-//           'Rotate and Pan Objects',
-//           () => Navigator.push(context,
-//               MaterialPageRoute(builder: (context) => ObjectGesturesWidget()))),
-//     ];
-//     return ListView(
-//       children:
-//           examples.map((example) => ExampleCard(example: example)).toList(),
-//     );
-//   }
-// }
-//
-// class ExampleCard extends StatelessWidget {
-//   ExampleCard({Key? key, required this.example}) : super(key: key);
-//   final Example example;
-//
-//   @override
-//   build(BuildContext context) {
-//     return Card(
-//       child: InkWell(
-//         splashColor: Colors.blue.withAlpha(30),
-//         onTap: () {
-//           example.onTap();
-//         },
-//         child: ListTile(
-//           title: Text(example.name),
-//           subtitle: Text(example.description),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// class Example {
-//   const Example(this.name, this.description, this.onTap);
-//   final String name;
-//   final String description;
-//   final Function onTap;
-// }

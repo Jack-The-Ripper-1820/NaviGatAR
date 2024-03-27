@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -9,17 +8,16 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:frontend/constants.dart';
 
-// import 'package:localstorage/localstorage.dart';
-
 final dio = Dio();
 
-class MuseumList extends StatefulWidget {
-  MuseumList({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  static String routeName = "/home";
+  Home({Key? key}) : super(key: key);
   @override
-  _MuseumList createState() => _MuseumList();
+  _Home createState() => _Home();
 }
 
-class _MuseumList extends State<MuseumList> {
+class _Home extends State<Home> {
   Future<Museum> getMuseum() async {
     Response data = await dio.get(
         '$apiUrl/api/tourist/museumsFeed');

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:frontend/screens/home.dart';
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/form_error.dart';
 //import 'package:flutter_application_1/helper/keyboard.dart';
-import '../../../screens/forgot_password/forgot_password_screen.dart';
 import 'package:frontend/models/Sign_in_res.dart';
-import '../../../screens/login_success/login_success_screen.dart';
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -33,12 +33,28 @@ class _SignFormState extends State<SignForm> {
     super.initState();
   }
 
-  Future<Details> login() async {
+  Future<void> login(context) async {
     var params = {"email": email, "password": password};
     Response response =
         await dio.post('$apiUrl/api/tourist/login', data: jsonEncode(params));
-    Details det = Details.fromJson(response.data);
-    return det;
+    if(response.statusCode == 401) {
+      Fluttertoast.showToast(
+          msg: "Incorrect credentials. Please try again.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    } else {
+      Details det = Details.fromJson(response.data);
+      final user = Hive.box("user");
+      user.put('id', det.userData!.id);
+      user.put('token', det.userData!.token);
+      Navigator.pushNamed(context, Home.routeName);
+    }
+
   }
 
   void addError({String? error}) {
@@ -71,21 +87,10 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // print(email);
-                // print(password);
-                // final id = db.collection('users').doc().id;
-                final user = Hive.box("user");
-                login().then((value) => {
-                      user.put('id', value.userData!.id),
-                      user.put('token', value.userData!.token),
-                      print(user.get('id'))
-                    });
-
-                // Details? info = res;
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                await login(context);
               }
             },
           ),
@@ -102,8 +107,6 @@ class _SignFormState extends State<SignForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
         }
         setState(() {
           password = value;
@@ -113,9 +116,6 @@ class _SignFormState extends State<SignForm> {
       validator: (value) {
         if (value!.isEmpty) {
           addError(error: kPassNullError);
-          return "";
-        } else if (value.length < 2) {
-          addError(error: kShortPassError);
           return "";
         }
         return null;
@@ -150,6 +150,8 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       validator: (value) {
+        removeError(error: kInvalidEmailError);
+        removeError(error: kEmailNullError);
         if (value!.isEmpty) {
           addError(error: kEmailNullError);
           return "";

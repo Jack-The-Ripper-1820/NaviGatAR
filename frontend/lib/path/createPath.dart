@@ -75,6 +75,14 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
                       ),
                       Expanded(
                         child: ElevatedButton(
+                          onPressed: removeLastNode,
+                          child: const Text("Remove Last Node"),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff1ce0e2)),
+                        ),
+                      ),
+                      Expanded(
+                        child: ElevatedButton(
                           onPressed: onUpload,
                           child: const Text("Upload Path 🚀"),
                           style: ElevatedButton.styleFrom(
@@ -179,6 +187,20 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
     }
   }
 
+  Future<void> removeLastNode() async {
+    print("removeLastNode");
+    if (nodes.isNotEmpty && anchors.isNotEmpty) {
+      print("inside if in REMOVE LAST NODE");
+      // Remove the last node from the AR session and the list
+      await arObjectManager!.removeNode(nodes.last);
+      nodes.removeLast();
+
+      // Remove the associated anchor from the AR session and the list
+      await arAnchorManager!.removeAnchor(anchors.last);
+      anchors.removeLast();
+    }
+  }
+
   Future<void> placeduck() async {
     var x = await arSessionManager!.getCameraPose() ??
         Matrix4(
@@ -208,6 +230,7 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         scale: Vector3(0.9, 0.9, 0.9),
         position: Vector3(0.011439, -0.00871425, -0.5),
         rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
+    nodes.add(newNode);
     this.arObjectManager!.addNode(newNode, planeAnchor: anchor);
     bool? didAddAnchor =
         await this.arObjectManager!.addNode(newNode, planeAnchor: anchor);

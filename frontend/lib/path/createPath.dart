@@ -157,7 +157,7 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         type: NodeType.localGLTF2,
         uri:
         "assets/icons/src.gltf",
-        scale: Vector3(0.9, 0.9, 0.9),
+        scale: Vector3(0.9 * 2, 0.9 * 2, 0.9 * 2),
         position: Vector3(0.011439, -0.00871425, -0.5),
         rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
 
@@ -173,7 +173,7 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         type: NodeType.localGLTF2,
         uri:
         "assets/icons/dest.gltf",
-        scale: Vector3(0.9, 0.9, 0.9),
+        scale: Vector3(0.9 * 2, 0.9 * 2, 0.9 * 2),
         position: Vector3(0.011439, -0.00871425, -0.5),
         rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
 

@@ -92,8 +92,8 @@ class _Museum extends State<MuseumRegistration> {
                         style: TextStyle(color: Colors.white),
                         // obscureText: true,
                         onSaved: (newValue) => museumName = newValue,
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        // keyboardType:
+                        //     TextInputType.numberWithOptions(decimal: true),
                         onChanged: (value) {
                           setState(() {
                             museumName = value;

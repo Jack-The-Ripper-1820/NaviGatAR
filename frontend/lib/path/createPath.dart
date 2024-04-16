@@ -75,6 +75,14 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
                       ),
                       Expanded(
                         child: ElevatedButton(
+                          onPressed: removeLastNode,
+                          child: const Text("Remove Last Node"),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff1ce0e2)),
+                        ),
+                      ),
+                      Expanded(
+                        child: ElevatedButton(
                           onPressed: onUpload,
                           child: const Text("Upload Path 🚀"),
                           style: ElevatedButton.styleFrom(
@@ -145,11 +153,27 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
 
     print(res.data[0]["transformation"]);
 
+    var newNodeSrc = ARNode(
+        type: NodeType.localGLTF2,
+        uri:
+        "assets/icons/src.gltf",
+        scale: Vector3(0.9 * 2, 0.9 * 2, 0.9 * 2),
+        position: Vector3(0.011439, -0.00871425, -0.5),
+        rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
+
     var newNode = ARNode(
         type: NodeType.localGLTF2,
         uri:
             "assets/icons/scene.gltf",
         scale: Vector3(0.9, 0.9, 0.9),
+        position: Vector3(0.011439, -0.00871425, -0.5),
+        rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
+
+    var newNodeDst = ARNode(
+        type: NodeType.localGLTF2,
+        uri:
+        "assets/icons/dest.gltf",
+        scale: Vector3(0.9 * 2, 0.9 * 2, 0.9 * 2),
         position: Vector3(0.011439, -0.00871425, -0.5),
         rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
 
@@ -174,8 +198,30 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
               x[14].toDouble(),
               x[15].toDouble()));
       await arAnchorManager!.addAnchor(anchor);
-      await arObjectManager!.addNode(newNode, planeAnchor: anchor);
+      if(i == res.data.length - 1) {
+        await arObjectManager!.addNode(newNodeDst, planeAnchor: anchor);
+      }
+      else if(i == 0) {
+        await arObjectManager!.addNode(newNodeSrc, planeAnchor: anchor);
+      }
+      else {
+        await arObjectManager!.addNode(newNode, planeAnchor: anchor);
+      }
       await Future.delayed(const Duration(seconds: 2));
+    }
+  }
+
+  Future<void> removeLastNode() async {
+    print("removeLastNode");
+    if (nodes.isNotEmpty && anchors.isNotEmpty) {
+      print("inside if in REMOVE LAST NODE");
+      // Remove the last node from the AR session and the list
+      await arObjectManager!.removeNode(nodes.last);
+      nodes.removeLast();
+
+      // Remove the associated anchor from the AR session and the list
+      await arAnchorManager!.removeAnchor(anchors.last);
+      anchors.removeLast();
     }
   }
 
@@ -208,6 +254,7 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         scale: Vector3(0.9, 0.9, 0.9),
         position: Vector3(0.011439, -0.00871425, -0.5),
         rotation: Vector4(0.534616, -0.525168, -0.468367, 0));
+    nodes.add(newNode);
     this.arObjectManager!.addNode(newNode, planeAnchor: anchor);
     bool? didAddAnchor =
         await this.arObjectManager!.addNode(newNode, planeAnchor: anchor);

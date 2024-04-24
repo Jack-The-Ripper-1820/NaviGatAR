@@ -73,8 +73,8 @@ To debug the application, you will need to set up your mobile device for debuggi
 - [Configure On-device Developer Options](https://developer.android.com/studio/debug/dev-options)
 - [Set Up Wireless Debugging](https://developer.android.com/studio/command-line/adb#wireless)
 
-- **Xcode Debugging:**
-- [Launch Your App on a Device](https://developer.apple.com/documentation/xcode/running_your_app_in_the_simulator_or_on_a_device)
+- **Xcode Debugging: (Recommended)** 
+- [Launch Your App on a Device](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device)
 - [Wireless Debugging in Xcode](https://help.apple.com/xcode/mac/current/#/dev60b6fbbc7)
 
 Ensure you follow these instructions to properly prepare your device for a debugging session with your PC.
